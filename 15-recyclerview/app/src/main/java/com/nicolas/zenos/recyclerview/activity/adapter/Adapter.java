@@ -40,7 +40,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 20;
+        return 6;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
