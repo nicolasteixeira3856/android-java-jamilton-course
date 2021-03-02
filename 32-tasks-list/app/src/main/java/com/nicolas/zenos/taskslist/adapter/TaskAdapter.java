@@ -1,5 +1,6 @@
 package com.nicolas.zenos.taskslist.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.MyViewHolder> 
 
     @Override
     public int getItemCount() {
+        //Log.i("Size", String.valueOf(this.taskList.size()));
         return this.taskList.size();
     }
 }
