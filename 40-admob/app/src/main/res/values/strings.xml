@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">AdMob</string>
+    <string name="native_ad">ANÚNCIO NATIVO</string>
+    <string name="rewarded_ad">ANÚNCIO PREMIADO</string>
+    <string name="logo">Logo AdMob</string>
+    <string name="points">PONTOS: 0</string>
+    <string name="more_points">GANHAR + 10 PONTOS</string>
+    <string name="native_ad_test_id">ca-app-pub-3940256099942544/2247696110</string>
+    <string name="reward_ad_test_id">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="interstitial_ad_test_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="banner_ad_test_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="app_ad_id">ca-app-pub-1090922625000323~2825497408</string>
+    <string name="native_template_small">NATIVO PEQUENO</string>
+    <string name="native_template_medium">NATIVO MÉDIO</string>
+    <string name="native_template_custom">NATIVO CUSTOMIZADO</string>
+</resources>
