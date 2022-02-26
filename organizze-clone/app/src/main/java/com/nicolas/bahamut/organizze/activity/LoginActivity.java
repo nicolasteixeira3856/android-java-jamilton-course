@@ -1,0 +1,98 @@
+package com.nicolas.bahamut.organizze.activity;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.nicolas.bahamut.organizze.R;
+import com.nicolas.bahamut.organizze.config.ConfiguracaoFirebase;
+import com.nicolas.bahamut.organizze.model.Usuario;
+
+public class LoginActivity extends AppCompatActivity {
+
+    private EditText campoEmail, campoSenha;
+    private Button botaoEntrar;
+    private Usuario usuario;
+    private FirebaseAuth autenticacao;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        campoEmail = findViewById(R.id.editEmailLogin);
+        campoSenha = findViewById(R.id.editSenhaLogin);
+        botaoEntrar = findViewById(R.id.botaoEntrar);
+
+        botaoEntrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String textoEmail = campoEmail.getText().toString();
+                String textoSenha = campoSenha.getText().toString();
+
+                if (textoEmail.isEmpty() || textoSenha.isEmpty()) {
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Por favor preencha todos os campos",
+                            Toast.LENGTH_LONG
+                    ).show();
+                } else {
+                    usuario = new Usuario();
+                    usuario.setEmail(textoEmail);
+                    usuario.setSenha(textoSenha);
+                    login();
+                }
+            }
+        });
+    }
+
+    public void login() {
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+        autenticacao.signInWithEmailAndPassword(
+                usuario.getEmail(), usuario.getSenha()
+        ).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if ( task.isSuccessful() ) {
+                    abrirTelaPrincipal();
+                } else {
+                    String excecao = "Não foi possível realizar o login, tente novamente!";
+                    try {
+                        throw task.getException();
+                    } catch (FirebaseAuthInvalidUserException e) {
+                        excecao = "E-mail não encontrado";
+                    } catch (FirebaseAuthInvalidCredentialsException e) {
+                        excecao = "E-mail e senha não correspondem a um usuário cadastrado";
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                    Toast.makeText(
+                        getApplicationContext(),
+                        excecao,
+                        Toast.LENGTH_LONG
+                    ).show();
+                }
+            }
+        });
+    }
+
+    public void abrirTelaPrincipal () {
+        startActivity(new Intent(this, PrincipalActivity.class));
+        finish();
+    }
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+        <TextView
+            android:id="@+id/toolbarTitle"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.miguelcatalan.materialsearchview.MaterialSearchView
+        android:id="@+id/materialSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="80dp" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout >
